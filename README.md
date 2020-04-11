@@ -1,28 +1,44 @@
-# project-with-docs
+# WiFi on the chain
 
-## 文档
+This is the all-in-one repo for my CP3106 project.
 
-_请熟悉[docusaurus]后再进行文档的修改和部署_
+## Introduction
 
-1. 已部署的文档位于`gh-pages`分支
-    请不要修改`gh-pages`分支的任何内容，因为都是由`yarn deploy`命令生成的。
+WiFi on the chain is a bidding based wireless resource allocation system using blockchian smart contract.
 
-2. 先在本地`yarn start`确定无异常情况后`deploy`
+## Features
 
-### 文档修改部署
+1. Log in
 
-```bash
-cd docs
-```
+    ![](img/loginHD.gif)
 
-打开`docusaurus.config.js`
+- Use `web3.eth.personal.unlockAccount` to verify the user.
+- Both `password` and `privatekey` are able to verify.
 
-1. 用搜索将 `Project Name` 换成项目名称。
+2. Register
 
-2. 用搜索将 `project-with-docs` 换成repo名称。
+    ![](img/registerHD.gif)
 
----
+3. Request for bandwidth
+    
+    - Request may be rejected
 
-# Need Help (TODO)
+    ![](img/requestReject.gif)
 
-目前，文档的目录结构并不完善，仍用docusaurus的template。如果你使用这个template完成了一个完整的项目，请借鉴你的文档结构完善这个template。
+    - If success
+
+    ![](img/RequestSuccess.gif)
+
+4. System Info
+
+    ![](img/SYSInformation.png)
+
+5. Top up balance
+
+    ![](img/BalanceTopUp.gif)
+
+## [Document](https://blog.aaron-xin.tech/wifi-on-chain)
+
+For the detailed documentation, please refer to upper link.
+
+# 欢迎小松松！！！
