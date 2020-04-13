@@ -1,0 +1,105 @@
+\chapter{Preliminaries}
+\label{chp:chap-two}
+
+\section{Resource Allocation Mechanism}
+
+In this session, the resource allocation mechanism used by our system will be introduced, and the reason we select it will be discussed as follow\cite{yang_price_2013}.
+
+\subsection{The Kelly Mechanism}
+
+In this section, we give some background about the Kelly mechanism and further generalize it by using an embedded price differentiation. In the next section, we will explore the properties of the generalized mechanisms.
+
+We consider a set $N=|\mathscr{N}|>1$ of rational users bidding for a share of divisible resource of capacity $C$. We assume that more than one user compete for the resource, i.e., $N=|\mathscr{N}|>1$. Each user i has a valuation function $v_{i}(\cdot)$, where $v_{i}\left(d_{i}\right)$ defines the monetary utility to user i when she is given $d_{i}$ amount of the resource.
+
+A common objective in resource allocation is to maximize the social welfare. Under our context, it is to maximize the sum of the valuations of all the users as the following optimization problem:
+
+\begin{itemize}
+\item max           $\sum_{i \in \mathcal{N}} v_{i}\left(d_{i}\right)$
+\item subject to    $\sum_{i \in \mathcal{N}} d_{i} \leq C \quad$ and $\quad d_{i} \geq 0 \forall i \in \mathcal{N}$
+\end{itemize}
+
+We define the above convex and compact constraint set as
+$$
+\mathscr{D}=\left\{\mathbf{d} | \sum_{i \in \mathcal{N}} d_{i} \leq c, \text { and } d_{i} \geq 0, \forall i \in \mathcal{N}\right\}
+$$
+In the Kelly mechanism [1] , each user $i$ submits a bid $w_{i} \geq 0$, which equals the payment for obtaining a share $d_{i}$ of the resource. We denote $u_{i}$ as the utility of each user $i$, defined in a quasi-linear [12] environment as $u_{i}\left(d_{i}\right)=v_{i}\left(d_{i}\right)-w_{i}$
+which is the valuation of the allocated resource $v_{i}\left(d_{i}\right)$ less the payment $w_{i}$. The Kelly mechanism allocates the full capacity
+C among all users and the resource share $d_{i}$ of each user $i$ is proportional to her bid $w_{i} .$ Mathematically, given a nonzero bid vector $\mathbf{w}=\left(w_{1}, w_{2}, \ldots, w_{N}\right),$ the resource allocation vector $\mathbf{d}=\left(d_{1}, d_{2}, \ldots, d_{N}\right)$ is defined by
+$$
+d_{i}=D_{i}(\mathbf{w})=\frac{w_{i}}{\sum_{j=1}^{N} w_{j}} c, \quad \forall i \in \mathcal{N}
+$$
+where $D_{i}(\cdot)$ denotes the proportional allocation function for user $i$ under the Kelly mechanism.
+
+As a result of the Kelly mechanism, each user is charged the same unit price of the resource $\mu$ such that $\mu d_{i}=w_{i}$ for all users. This implicit unit price $\mu$ can be calculated as
+$$
+\mu=\frac{\sum_{j=1}^{N} w_{j}}{c}
+$$
+
+\subsection{The Generalized Kelly Mechanism}
+
+Rather than implementing a nondiscriminatory price $\mu$ under the Kelly mechanism, we consider a price differentiation among users. Our motivation of designing the price differentiation is to achieve different efficiency points for the social welfare defined as the objective function of (1). Under our generalization, we consider a strict positive price vector $\mathbf{p}=$ $\left(p_{1}, p_{2}, \ldots, p_{N}\right)$ as a parameter of the mechanism. Each user $i$ submits a bid $t_{i} \geq 0$ to compete for the resource and the allocation rule is the same proportional rule defined in Eq. (2):
+$$
+d_{i}=D_{i}(\mathbf{t})=\frac{t_{i}}{\sum_{j=1}^{N} t_{j}} c, \quad \forall i \in \mathcal{N}
+$$
+The difference of our generalization from the Kelly mechanism is that each user i pays $p_{i} t_{i}$ amount of money for $D_{i}(\mathbf{t})$ amount
+of shared resource, and therefore, obtains a utility of $u_{i}(\mathbf{t}, \mathbf{p})=v_{i}\left(d_{i}\right)-p_{i} t_{i}=v_{i}\left(D_{i}(t)\right)-p_{t} t_{i}$
+This generalized mechanism can be imagined as a process where users buy divisible tickets to compete for the resource. We denote $t_{i}$ as the number of tickets bought by user $i$ and $p_{i}$ as the monetary price of each ticket for user i. Like the Kelly mechanism, it fully allocates the capacity $C$ among all users and the resource share $d_{i}=D_{i}(\mathbf{t})$ to each user $i$ is proportional to the number of tickets bought: $t_{i .}$ Although we do not differentiate tickets in resource allocation, the unit ticket price to users could be different. In particular, the Kelly mechanism is a special case of the generalization where $\mathbf{p}=1$
+
+Compared to the Kelly mechanism, the generalized mechanism achieves a similar virtual unit price $v$ in terms of tickets (measured as tickets per unit of resource) defined as $v=\frac{\sum_{j=1}^{N} t_{j}}{c}$
+Consequently, the effective/real unit price for resource among users will be proportional to the price vector $\mathbf{p},$ because each user i's real price becomes $p_{i} v$ (measured as abstract monetary units per unit of resource). Notice that although a pre-determined price is assigned to each user, the generalized mechanism inherits the simplicity/scalability of the Kelly mechanism in two ways: ( 1) the strategy space of the mechanism is still simply one-dimensional; and ( 2 ) only a single virtual price feedback, i.e., $v$, is required to be sent to all users.
+
+\section{Blockchain Concepts}
+
+In this session, the basic definitions of Blockchain related terms are discussed in details, such as DApp, Smart Contract and Consensus Algorithm.
+
+\subsection{What is DApp}
+
+First of all, since our proposed system is a DApp\cite{johnston_general_nodate}, the DApp is introduced as follow. 
+
+\subsubsection{Definition}
+
+For an application to be considered a DApp, it must meet the following criteria:
+
+\begin{enumerate}
+\item The application must be completely open-source, it must operate autonomously, with no entity controlling the majority of its tokens, and its data and records of operation must be crypto graphically stored in a public, decentralized block chain.
+\item The application must generate tokens according to a standard algorithm or set of criteria and possibly distribute some or all of its tokens at the beginning of its operation. These tokens must be necessary for the use of the application and any contribution from users should be rewarded by payment in the application’s tokens.
+\item The application may adapt its protocol in response to proposed improvements and market feedback but all changes must be decided by majority consensus of its users.
+\end{enumerate}
+
+\subsubsection{The Bitcoin}
+
+The Bitcoin, the most famous DApp, is described as "A Peer-to-Peer Electronic Cash System\cite{nakamoto_bitcoin_nodate}" by Satoshi Nakamoto. Bitcoin has been shown to effectively solve the problems that arise from a trustless and scalable electronic cash system by using a peer-to-peer, distributed ledger, the Bitcoin block chain. In addition to being a peer-to-peer electronic cash system however, Bitcoin is also an application that users can interact with through computer software). But most importantly for the purposes of this paper, based on the criteria outlined above, Bitcoin is a decentralized application. Here is why:
+
+\begin{enumerate}
+\item All Bitcoin software applications are open-source, no entity (government,company, or organization) controls Bitcoin and all records related to the use of Bitcoin are open and public.
+\item Bitcoin generates its tokens, the bitcoins, with a predetermined algorithm that cannot be changed, and those tokens are necessary for Bitcoin to function. Bitcoin miners are rewarded with bitcoins for their contributions in securing the Bitcoin network.
+\item All changes to Bitcoin must be approved by a majority consensus of its users through the proof-of-work mechanism.
+\end{enumerate}
+
+\subsection{Smart Contract}
+
+A smart contract is a computer program that both expresses the contents of a contractual agreement and operates the implementation of that content, on the basis of triggers provided by the users or extracted from the environment. Smart contracts are currently promoted as means to leverage efficiency, security and impartiality in the execution of an agreement, thereby reducing the costs in implementing contracts and increasing trust between parties.
+
+Practically, smart contracts are in charge of reading and writing data to the Blockchain, as well as executing business logic. Smart contacts are written in a programming language called Solidity, which looks a lot like Javascript.
+
+In the case of our bidding DApp, it is an agreement that my bidding payment will count, that the Kelly mechanism controls the bidding result, and that every user would get corresponding resource - the bandwidth precisely.
+
+\subsection{Consensus Algorithm}
+
+We know that Blockchain is a distributed decentralized network that provides immutability, privacy, security, and transparency. There is no central authority present to validate and verify the transactions, yet every transaction in the Blockchain is considered to be completely secured and verified. This is possible only because of the presence of the consensus protocol which is a core part of any Blockchain network. 
+
+https://www.geeksforgeeks.org/consensus-algorithms-in-blockchain/
+
+A consensus algorithm is a procedure through which all the peers of the Blockchain network reach a common agreement about the present state of the distributed ledger. In this way, consensus algorithms achieve reliability in the Blockchain network and establish trust between unknown peers in a distributed computing environment. Essentially, the consensus protocol makes sure that every new block that is added to the Blockchain is the one and only version of the truth that is agreed upon by all the nodes in the Blockchain.
+
+The Blockchain consensus protocol consists of some specific objectives such as coming to an agreement, collaboration, co-operation, equal rights to every node, and mandatory participation of each node in the consensus process. Thus, a consensus algorithm aims at finding a common agreement that is a win for the entire network.
+
+\subsubsection{Proof of Work}
+
+The Proof-of-Work (PoW) is used to select a miner for the next block generation. Bitcoin uses this PoW consensus algorithm. The central idea behind this algorithm is to solve a complex mathematical puzzle and easily give out a solution. This mathematical puzzle requires a lot of computational power and thus, the node who solves the puzzle as soon as possible gets to mine the next block. 
+
+\subsubsection{Proof of Authority}
+
+https://www.coinhouse.com/learn/blockchain/what-is-proof-of-authority/
+
+The Proof-of-Authority (PoA) is a consensus method that gives a small and designated number of blockchain actors the power to validate transactions or interactions with the network and to update its more or less distributed registry. It works as follow: according to the chosen scheme, one or more validating machines are responsible for generating each new block of transactions that will be included in the Blockchain. The new block can be accepted directly without verification, or by unanimous vote of the block generators, or simply by a majority, depending on the configuration chosen for the Blockchain.

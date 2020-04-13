@@ -3,15 +3,36 @@ id: intro
 title: Introduction
 ---
 
-You can write JSX and use React components within your Markdown thanks to [MDX](https://mdxjs.com/).
+**YourWiFi** is a bidding based wireless resource allocation system using blockchian smart contract, which provides a Pay-as-You-Want WiFi Access Service on Blockchain.
 
-export const Highlight = ({children, color}) => ( <span style={{
-      backgroundColor: color,
-      borderRadius: '2px',
-      color: '#fff',
-      padding: '0.2rem',
-    }}> {children} </span> );
+![System Overview](/wifi-on-chain/img/docs/system.png)
 
-<Highlight color="#25c2a0">Docusaurus green</Highlight> and <Highlight color="#1877F2">Facebook blue</Highlight> are my favorite colors.
+## Problem Scenario
 
-I can write **Markdown** alongside my _JSX_!
+<br/>
+
+**Owner**: 1. Owns WiFi Resource 2. Provide it as a service
+
+**Users**: 1. Want WiFi Connection with Specified Bandwidth 2. Want Transparency and Fairness.
+
+## Components
+
+This system consists of three parts:
+
+  1. [Blockchain](/wifi-on-chain/docs/wifi-poa)
+  2. [User Interface](/wifi-on-chain/docs/wifi-dapp)
+  3. Bandwidth Controller
+
+## Development Tools
+
+1. Geth - Go Ethereum: Official Go implementation of the Ethereum protocol.
+  ```
+  geth <other-options> --dev --dev.period 1 # PoA
+  ```
+
+2. [Docker](#5)
+
+3. [Truffle](#6) Suite
+   - **Truffle**: the most popular development framework 
+   - Ganache: One click blockchain testnet.
+   - **Drizzle** (Font-end): Fast response. 

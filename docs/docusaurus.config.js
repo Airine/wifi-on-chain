@@ -1,6 +1,6 @@
 module.exports = {
-  title: 'WiFi on the chain',
-  tagline: 'Bidding based wireless resource allocation system running using blockchain.', // one sentence description
+  title: 'YourWiFi',
+  tagline: 'Pay-as-You-Want WiFi Access Service on Blockchain.', // one sentence description
   url: 'https://Airine.github.io',
   baseUrl: '/wifi-on-chain/',
   favicon: 'img/favicon.ico',
@@ -8,7 +8,7 @@ module.exports = {
   projectName: 'wifi-on-chain', // Usually your repo name.
   themeConfig: {
     navbar: {
-      title: 'WiFi on the chain',
+      title: 'YourWiFi',
       logo: {
         alt: 'Logo',
         src: 'img/logo.svg',
