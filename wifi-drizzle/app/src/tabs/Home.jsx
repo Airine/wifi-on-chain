@@ -71,7 +71,7 @@ class RequestForm extends React.Component {
 
                 <div style={{marginBottom: '10px'}}>
                     <Switch style={{display: 'inline-block'}} onChange={this.onChange}/> <p
-                    style={{display: 'inline-block', marginLeft: '15px'}}>Show advanced setting </p>
+                    style={{display: 'inline-block', marginLeft: '15px'}}> Advanced Setting </p>
                 </div>
 
 
@@ -129,38 +129,50 @@ class Home extends React.Component {
     }
 
     setUpConnection(values) {
-        let start = new Date().getTime();
+        // let start = new Date().getTime();
         this.setState({loading: true});
         message.loading({content: 'Processing your request', key: txnMessage});
-        // console.log(values);
+        console.log(values);
         let burst = values.burst ? values.burst : 0;
+        values["burst"] = burst;
+        values["addr"] = this.state.address;
+        console.log(values);
+        fetch('http://192.168.1.241:5000', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(values)
+        }).then(function(response) {
+            console.log(response);
+            message.success({content: 'Request approved!', key: txnMessage});
+            return response.json()
+        }).then(data => console.log(data));
         // console.log(this.state);
-        let w3 = options.web3.httpProvider;
-        w3.eth.personal.unlockAccount(this.state.address, this.state.password, 1500).then((response) => {
-            this.state.contract.methods.uponConnection(values.bandwidth, values.bid, burst).send({
-                from: this.state.address,
-                gas: 3000000,
-                value: Number(values.deposit)
-            }).on('transactionHash', function (hash) {
-                console.log('transactionHash');
-            }).on('receipt', function (receipt) {
-                message.success({content: 'Request approved!', key: txnMessage});
-                console.log('receipt');
-            }).on('confirmation', function (confirmationNumber, receipt) {
-                message.success({content: 'Request approved!', key: txnMessage});
-                console.log('confirmation');
-            }).on('error', function (error) {
-                message.error({content: 'Request rejected!', key: txnMessage});
-                console.error(error);
-            });
-        }).catch((error) => {
-            console.log(error);
-            message.error({content: 'Wrong password!', key: txnMessage});
-        }).then(() => {
-            this.setState({loading: false});
-            let total = new Date().getTime() - start;
-            message.info({content: 'Total time cost: ' + total + ' ms', duration: 5});
-        });
+        // let w3 = options.web3.httpProvider;
+        // w3.eth.personal.unlockAccount(this.state.address, this.state.password, 1500).then((response) => {
+        //     // this.state.contract.methods.uponConnection(values.bandwidth, values.bid, burst).send({
+        //     //     from: this.state.address,
+        //     //     gas: 3000000,
+        //     //     value: Number(values.deposit)
+        //     // }).on('transactionHash', function (hash) {
+        //     //     console.log('transactionHash');
+        //     // }).on('receipt', function (receipt) {
+        //     //     message.success({content: 'Request approved!', key: txnMessage});
+        //     //     console.log('receipt');
+        //     // }).on('confirmation', function (confirmationNumber, receipt) {
+        //     //     message.success({content: 'Request approved!', key: txnMessage});
+        //     //     console.log('confirmation');
+        //     // }).on('error', function (error) {
+        //     //     message.error({content: 'Request rejected!', key: txnMessage});
+        //     //     console.error(error);
+        //     // });
+        // }).catch((error) => {
+        //     console.log(error);
+        //     message.error({content: 'Wrong password!', key: txnMessage});
+        // }).then(() => {
+        //     this.setState({loading: false});
+        //     let total = new Date().getTime() - start;
+        //     message.info({content: 'Total time cost: ' + total + ' ms', duration: 5});
+        // });
 
     }
 

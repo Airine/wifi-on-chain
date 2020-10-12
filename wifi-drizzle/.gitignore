@@ -3,5 +3,4 @@ app/node_modules
 build
 app/src/contracts
 .DS_Store
-*package-lock.json
 .idea/

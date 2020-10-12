@@ -83,7 +83,7 @@ function Main(props) {
 
                     </div>
                 </Content>
-                <Footer className="footer" style={{textAlign: 'center'}}>WiFi-Drrizle © 2020 Created by Runxin</Footer>
+                <Footer className="footer" style={{textAlign: 'center'}}></Footer>
             </Layout>
         </Router>
     );
