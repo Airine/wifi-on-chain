@@ -1,6 +1,7 @@
 const path = require("path");
-const Web3 = require("web3");
-// const HDWalletProvider = require("truffle-hdwallet-provider");
+
+// const HDWalletProvider = require("@truffle/hdwallet-provider");
+// const Web3 = require("web3");
 //
 // var mnemonic = "mountains supernatural bird ...";
 module.exports = {
@@ -14,16 +15,16 @@ module.exports = {
       network_id: "*",
       gas:0,
     },
-    pow: {
-      host: 'localhost',
-      port: 7545,
-      network_id: "*",
-    },
     pi: {
       host: '192.168.1.140',
       port: 8545,
       network_id: "*",
       gas:0,
+    },
+    ganache: {
+      host: 'localhost',
+      port: 7545,
+      network_id: "*",
     }
   }
 };

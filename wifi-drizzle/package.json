@@ -24,5 +24,8 @@
     "@openzeppelin/contracts": "2.5.0",
     "truffle-hdwallet-provider": "^1.0.17",
     "web3": "^1.2.6"
+  },
+  "devDependencies": {
+    "@truffle/hdwallet-provider": "^1.0.40"
   }
 }

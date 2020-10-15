@@ -4,3 +4,4 @@ build
 app/src/contracts
 .DS_Store
 .idea/
+.vscode

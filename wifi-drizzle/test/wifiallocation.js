@@ -16,36 +16,38 @@ contract("WiFiAllocation", accounts=>{
     assert.equal(owner, accounts[0], "Wrong owner!")
   });
 
-  it('Five users request one by one', async () => {
+  it('First Request', async () => {
     const instance = await WiFiAllocation.deployed();
-    await instance.uponConnection(10,5,0, {from:accounts[1], gas:3000000, value:1});
-    await instance.uponConnection(10,6,0, {from:accounts[2], gas:3000000, value:1});
-    await instance.uponConnection(10,10,0, {from:accounts[3], gas:3000000, value:1});
-    await instance.uponConnection(10,4,0, {from:accounts[4], gas:3000000, value:1});
-    await instance.uponConnection(10,1,0, {from:accounts[5], gas:3000000, value:1});
-    // const numUsers = await instance.numUsers.call();
-    // assert.equal(numUsers, 5, "Wrong # of users!")
+    await instance.uponConnection(20,5,0, {from:accounts[1], gas:3000000, value:1});
+    assert.equal(1, 1, "complete")
   });
 
-  it('Access allocated bandwidth', async () => {
+  it('Anoter Request', async () => {
     const instance = await WiFiAllocation.deployed();
-    const numUsers = await instance.numUsers.call();
-    for (let i = 0; i < numUsers; i++) {
-      const allocated = await instance.allocatedBandwidth(i);
-      // console.log(allocated);
-    }
-    assert.equal(1,1, "just display");
+    await instance.uponConnection(20,5,0, {from:accounts[1], gas:3000000, value:1});
+    assert.equal(1, 1, "complete")
   });
 
-  // it('There should be no user.', async () => {
-  //   const instance = await WiFiAllocation.deployed();
-  //     await instance.uponConnection(0,0,0, {from:accounts[1], gas:3000000, value:1});
-  //     await instance.uponConnection(0,0,0, {from:accounts[2], gas:3000000, value:1});
-  //     await instance.uponConnection(0,0,0, {from:accounts[3], gas:3000000, value:1});
-  //     await instance.uponConnection(0,0,0, {from:accounts[4], gas:3000000, value:1});
-  //     await instance.uponConnection(0,0,0, {from:accounts[5], gas:3000000, value:1});
-  //   const numUsers = await instance.numUsers.call();
-  //   assert.equal(numUsers, 0, "Wrong # of users!")
-  // });
+  it('Top-up Balance', async () => {
+    const instance = await WiFiAllocation.deployed();
+    await instance.addBalance({from:accounts[1], gas:3000000, value:10000});
+    assert.equal(1, 1, "complete")
+  });
 
+  it('Info', async () => {
+    const instance = await WiFiAllocation.deployed();
+    await instance.totalBandwidth.call();
+    await instance.totalBandwidth.call();
+    await instance.totalBandwidth.call();
+    await instance.totalBandwidth.call();
+    await instance.totalBandwidth.call();
+    assert.equal(1, 1, "complete")
+  })
+
+  it('Exit', async () => {
+    const instance = await WiFiAllocation.deployed();
+    await instance.uponConnection(0,0,0, {from:accounts[1], gas:3000000, value:1});
+    assert.equal(1, 1, "complete")
+  });
+  
 });

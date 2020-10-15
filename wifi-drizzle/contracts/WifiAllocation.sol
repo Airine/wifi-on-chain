@@ -19,6 +19,7 @@ contract WifiAllocation {
     uint constant burstPriceScalingFactor = 100;
     uint public minBandwidthPrice;
     uint public bandwidthPrice;
+    uint public oldPrice;
     uint public minBurstPriceFactor;
     // If user does not specify desired burst, a default value is returned (e.g., 1MB)
     uint public burstPrice;
@@ -211,6 +212,23 @@ contract WifiAllocation {
         emit UponAllocation(numUsers, allocatedBandwidth, currentBalances, actualPrices, isActive, burstVol);
     }
     
+    // Top-up back to user according to the bandwidth wasted
+    // e.g. userID 1, bandwidth 1MB, duration 2 second: (1, 100, 200, false)
+    function topBack(uint userID, uint bandwidth, uint duration, bool useOldPrice) public onlyOwner {
+        uint timingFactor = 100;
+        if(isActive[userID]) {
+            uint price = useOldPrice ? oldPrice : bandwidthPrice;
+            uint topBackFee = price * bandwidth * duration / (bandwidthPriceScalingFactor * bandwidthScalingFactor * timingFactor);
+            currentBalances[userID] += topBackFee;
+            if (pendingCollection >= topBackFee) {
+                pendingCollection -= topBackFee;
+            } else {
+                pendingCollection = 0;
+            }
+        }
+    }
+    
+    
     // When the user has never connected before
     function connectionInitialisation(uint bandwidth, uint thresholdBid, uint burst) internal requirePayment returns (uint userID) {
         // Create profile for the new user
@@ -379,6 +397,7 @@ contract WifiAllocation {
     // NOTICE: deltaBandwidth is a scaled value
     function updatePrice(uint deltaBandwidth, bool isPositive) internal {
         // uint prevPrice = bandwidthPrice;
+        oldPrice = bandwidthPrice;
         if(totalDesiredBandwidth <= totalBandwidth) {
             bandwidthPrice = minBandwidthPrice * bandwidthPriceScalingFactor;
         } else {
