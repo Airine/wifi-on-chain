@@ -159,7 +159,14 @@ contract WifiAllocation {
     function getUserID(address _user) public view returns (uint) {
         return occupiedID[_user];
     }
+
+    function getUserAllocation(uint _userID) public view returns (uint) {
+        return allocatedBandwidth[_userID]/bandwidthScalingFactor;
+    }
     
+    function getUserBalance(uint _userID) public view returns (uint) {
+        return currentBalances[_userID];
+    }
         
     // Perform bandwidth allocation depending on the demand and supply
     function performAllocation() public {
@@ -204,7 +211,7 @@ contract WifiAllocation {
                     users[i + 1].burst = 0;
                     burstVol[i] = 0;
                     // Calculate the allocation again since the demand has changed
-                    performAllocation();
+                    // performAllocation();
                 }
             }
         }
@@ -251,8 +258,8 @@ contract WifiAllocation {
         actualPrices.push(bandwidthPrice);
         burstVol.push(burst);
         updatePrice(bandwidth * bandwidthScalingFactor, true);
-        performAllocation();
-        updateBalance();
+        //performAllocation();
+        //updateBalance();
     }
     
     // When the user is still connected
@@ -284,8 +291,8 @@ contract WifiAllocation {
         // // unintentionally increase the price
         // bool isPositive = (bandwidth >= users[userID].desiredBandwidth);
         // updatePrice(isPositive ? (bandwidth - users[userID].desiredBandwidth) * bandwidthScalingFactor : (users[userID].desiredBandwidth - bandwidth) * bandwidthScalingFactor, isPositive);
-        performAllocation();
-        updateBalance();
+        //performAllocation();
+        //updateBalance();
     }
     
     // When the user has connected before but was deactivated from connection
@@ -310,8 +317,8 @@ contract WifiAllocation {
         users[userID].burst = burst;
         burstVol[userID - 1] = burst;
         updatePrice(bandwidth * bandwidthScalingFactor, true);
-        performAllocation();
-        updateBalance();
+        //performAllocation();
+        //updateBalance();
     }
     
     // When the user wants to quit the connection
@@ -339,8 +346,8 @@ contract WifiAllocation {
         actualPrices[userID - 1] = 0;
         // Similar to connectionRenewal(), the deltaBandwidth depends on the *actually received bandwidth*
         updatePrice(deltaBandwidth, false);
-        performAllocation();
-        updateBalance();
+        //performAllocation();
+        //updateBalance();
     }
     
     // When the total desired bandwidth does not exceed the available bandwidth:
