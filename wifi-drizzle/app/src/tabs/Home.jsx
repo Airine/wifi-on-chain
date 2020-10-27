@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button, Divider, Form, InputNumber, message, Modal, Result, Switch, Typography} from 'antd';
-import options from "../drizzleOptions";
+import {instanceOf} from 'prop-types'
+import {Cookies} from 'react-cookie'
 
 const {Title, Paragraph} = Typography;
 
@@ -90,11 +91,16 @@ const InlineRequestForm = Form.create({name: 'request_form'})(RequestForm);
 
 class Home extends React.Component {
 
+    static propTypes = {
+        cookies: instanceOf(Cookies).isRequired
+    };
+
     constructor(props) {
         super(props);
+        const {cookies} = props;
         this.state = {
-            address: props.address,
-            password: props.password,
+            address: props.address || cookies.get('address'),
+            password: props.password || cookies.get('password'),
             contract: null,
             loading: false,
             txnModal: false,
@@ -133,9 +139,10 @@ class Home extends React.Component {
         this.setState({loading: true});
         message.loading({content: 'Processing your request', key: txnMessage});
         console.log(values);
-        let burst = values.burst ? values.burst : 0;
+        let burst = values.burst ? values.burst : 1;
         values["burst"] = burst;
         values["addr"] = this.state.address;
+        values["pw"] = this.state.password;
         console.log(values);
         fetch('http://192.168.1.241:5000', {
             method: 'POST',
@@ -147,33 +154,6 @@ class Home extends React.Component {
             return response.json()
         }).then(data => console.log(data));
         // console.log(this.state);
-        // let w3 = options.web3.httpProvider;
-        // w3.eth.personal.unlockAccount(this.state.address, this.state.password, 1500).then((response) => {
-        //     // this.state.contract.methods.uponConnection(values.bandwidth, values.bid, burst).send({
-        //     //     from: this.state.address,
-        //     //     gas: 3000000,
-        //     //     value: Number(values.deposit)
-        //     // }).on('transactionHash', function (hash) {
-        //     //     console.log('transactionHash');
-        //     // }).on('receipt', function (receipt) {
-        //     //     message.success({content: 'Request approved!', key: txnMessage});
-        //     //     console.log('receipt');
-        //     // }).on('confirmation', function (confirmationNumber, receipt) {
-        //     //     message.success({content: 'Request approved!', key: txnMessage});
-        //     //     console.log('confirmation');
-        //     // }).on('error', function (error) {
-        //     //     message.error({content: 'Request rejected!', key: txnMessage});
-        //     //     console.error(error);
-        //     // });
-        // }).catch((error) => {
-        //     console.log(error);
-        //     message.error({content: 'Wrong password!', key: txnMessage});
-        // }).then(() => {
-        //     this.setState({loading: false});
-        //     let total = new Date().getTime() - start;
-        //     message.info({content: 'Total time cost: ' + total + ' ms', duration: 5});
-        // });
-
     }
 
     render() {

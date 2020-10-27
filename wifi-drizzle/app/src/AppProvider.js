@@ -51,6 +51,7 @@ class AppProvider extends React.Component {
         const {cookies} = this.props;
         const w3 = drizzleOptions.web3.httpProvider;
         const {address, auto, password, remember} = msg;
+        console.log(msg);
         if (auto === undefined) {
             message.loading({content: 'Verifying account...', key: loginMessage});
             w3.eth.personal.unlockAccount(address, password, 600).then((response) => {
@@ -72,26 +73,28 @@ class AppProvider extends React.Component {
                 message.error({content: "Wrong password!", key: loginMessage})
             });
         } else {
+            console.log("new account!!!");
+
             w3.eth.personal.newAccount(password).then(res => {
-                // console.log("new account");
-                // console.log(res);
+                console.log("new account");
+                console.log(res);
                 this.setState({
                     address: res,
                     password: password,
                     loading: false
                 });
-            });
-            if (auto) {
-                this.setState({
-                    user: true
-                });
-                if (remember) {
-                    cookies.set("user", true, {path: "/"});
-                    cookies.set("address", this.state.address, {path: "/"});
-                    cookies.set("password", this.state.password, {path: "/"});
+                if (auto) {
+                    this.setState({
+                        user: true
+                    });
+                    if (remember) {
+                        cookies.set("user", true, {path: "/"});
+                        cookies.set("address", this.state.address, {path: "/"});
+                        cookies.set("password", this.state.password, {path: "/"});
+                    }
                 }
-            }
-            this.setRegisterVisible(true);
+                this.setRegisterVisible(true);
+            });
         }
     }
 
