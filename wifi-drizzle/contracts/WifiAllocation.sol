@@ -284,13 +284,13 @@ contract WifiAllocation {
         // e.g., User i desires 40 units bandwidth at price 1.2, but receives 32 units at price 1.5
         // Now he only wants 20 units instead, so the total bid is reduced by 1.5 * (32 - 20)
         // ***NOTE***: receivedBandwidth is scaled by bandwidthScalingFactor
-        bool isPositive = (bandwidth * bandwidthScalingFactor >= users[userID].receivedBandwidth);
-        updatePrice(isPositive ? (bandwidth * bandwidthScalingFactor - users[userID].receivedBandwidth) : (users[userID].receivedBandwidth - bandwidth * bandwidthScalingFactor), isPositive);
+        // bool isPositive = (bandwidth * bandwidthScalingFactor >= users[userID].receivedBandwidth);
+        // updatePrice(isPositive ? (bandwidth * bandwidthScalingFactor - users[userID].receivedBandwidth) : (users[userID].receivedBandwidth - bandwidth * bandwidthScalingFactor), isPositive);
         // --------------------------------------
         // // ***REMOVED***: depending on the *desired bandwidth* instead, otherwise a user who only wants to top up his balance but retaining his desired bandwidth may 
         // // unintentionally increase the price
-        // bool isPositive = (bandwidth >= users[userID].desiredBandwidth);
-        // updatePrice(isPositive ? (bandwidth - users[userID].desiredBandwidth) * bandwidthScalingFactor : (users[userID].desiredBandwidth - bandwidth) * bandwidthScalingFactor, isPositive);
+        bool isPositive = (bandwidth >= users[userID].desiredBandwidth);
+        updatePrice(isPositive ? (bandwidth - users[userID].desiredBandwidth) * bandwidthScalingFactor : (users[userID].desiredBandwidth - bandwidth) * bandwidthScalingFactor, isPositive);
         //performAllocation();
         //updateBalance();
     }

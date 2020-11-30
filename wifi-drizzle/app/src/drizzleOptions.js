@@ -2,7 +2,7 @@ import Web3 from "web3";
 import WifiAllocation from "./contracts/WifiAllocation.json"
 
 // const ip = '192.168.1.140'; // ip address of raspberry pi
-const ip = '192.168.1.186'; // development
+const ip = '192.168.1.27'; // development
 
 const options = {
     web3: {
